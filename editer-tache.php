@@ -14,6 +14,20 @@ $requete->execute([
 ]);
 
 $tache = $requete->fetch();
+
+if(isset($_POST["valider"])) {
+    $requete = $connexion->prepare(
+        'UPDATE tache 
+        SET titre = ?, contenu = ?
+        WHERE id = ?'
+    );
+    $requete->execute([
+        $_POST['titre'],
+        $_POST['contenu'],
+        $_GET['id']
+    ]);
+    header('Location: liste.php');
+}
 ?>
 
 <form method="POST">
